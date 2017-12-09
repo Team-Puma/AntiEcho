@@ -1,6 +1,5 @@
 import * as types from '../constants/actionTypes';
 import fetch from 'isomorphic-fetch';
-import { ADD_FAVORITE } from '../constants/actionTypes';
 // const request = require('request');
 
 export const searchArticles = (response) => ({
@@ -78,6 +77,36 @@ export const addFavorite = (favorite) => ({
 export const logout = () => ({
   type: types.LOGOUT,
 });
+
+export const updateFavorites = (favorite) => {
+  return (dispatch, getState) => {
+    const favorites = [...getState().user.favorites, favorite];
+    const email = getState().user.email;
+    return fetch('http://localhost:3000/user/update/favorites', {
+      method: 'POST',
+      body: {
+        email,
+        favorites,
+      },
+    }).then(dispatch(addFavorite(favorite)))
+    .catch(err => console.log(err));
+  };
+};
+
+export const updateSlider = () => {
+  return (dispatch, getState) => {
+    const email = getState().user.email;
+    const slider = getState().main.sliderValue;
+    return fetch('http://localhost:3000/user/update/slider', {
+      method: 'POST',
+      body: {
+        email,
+        slider,
+      },
+    }).then(dispatch(setSlider()))
+    .catch(err => console.log(err));
+  };
+};
 
 export const login = () => {
   return (dispatch, getState) => {

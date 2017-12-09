@@ -3,47 +3,39 @@ import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'm
 import FlatButton from 'material-ui/FlatButton';
 
 const NewsFeedItem = props => {
+  let buttonClass = 'hidden';
+  if (props.email !== '') buttonClass = 'visible';
+
   return (
-    <div id="card"><a href={props.url}>
+    <div id="card">
       <Card style={{
         width: '100%'
       }}>
-        <CardHeader
-          title={props.title}
-          subtitle={props.source}
-          titleStyle={{
-            fontSize: '18px',
-          }}
-          textStyle={{paddingRight: '0px'}}
-        />
-        <CardMedia>
-          <img src={props.urlToImage} alt="" />
-        </CardMedia>
-        <CardTitle
-          // title={props.source} subtitle={props.author}
-        />
-        <CardText>
-          {props.description}
-        </CardText>
+        <a href={props.url}>
+          <CardHeader
+            title={props.title}
+            subtitle={props.source}
+            titleStyle={{
+              fontSize: '18px',
+            }}
+            textStyle={{paddingRight: '0px'}}
+          />
+          <CardMedia>
+            <img src={props.urlToImage} alt="" />
+          </CardMedia>
+          <CardTitle
+            // title={props.source} subtitle={props.author}
+          />
+          <CardText>
+            {props.description}
+          </CardText>
+        </a>
       </Card>
-      <FlatButton className="hidden">
-          Add to Favorites
-      </FlatButton>
-      {/* <Card>
-        <CardHeader
-          title={props.title}
-          subtitle={props.source}
-          actAsExpander={true}
-          showExpandableButton={true}
-        />
-        <CardText expandable={true}>
-          {props.author}
-          <br />
-          <a href={props.url}>{props.description}</a>
-          <img src={props.urlToImage} />
-        </CardText>
-      </Card> */}
-    </a>
+      <div className={buttonClass}>
+        <FlatButton onClick={props.handleClick}>
+            Add to Favorites
+        </FlatButton>
+      </div>
     </div>
   );
 };

@@ -24,6 +24,8 @@ class NewsContainer extends Component {
         url={article.url}
         urlToImage={article.urlToImage}
         publishedAt={article.publishedAt}
+        email={this.props.email}
+        handleClick={this.props.handleClick}
       />
     });
     return (

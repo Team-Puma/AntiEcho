@@ -64,3 +64,11 @@ a {
   width: 300px;
   padding: 5px;
 }
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: inline;
+}
