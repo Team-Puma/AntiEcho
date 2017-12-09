@@ -1,9 +1,13 @@
 import React from 'react';
 import Slider from 'material-ui/Slider';
+import FlatButton from 'material-ui/FlatButton'; 
 // import logo from './red-blue-line.png'; 
 
 const PoliticalSlider = (props) => {
   // console.log(props.sliderValue);
+  let buttonClass = 'hidden';
+  if (props.email !== '') buttonClass = 'visible';
+
   return (
     <div id="slider">
       <Slider
@@ -20,6 +24,11 @@ const PoliticalSlider = (props) => {
       <img id='red-blue-line' src={'./red-blue-line.png'}/>
       <div id="sliderText">
         Adjusting the slider modifies the political leaning of the news below. 
+      </div>
+      <div className={buttonClass}>
+        <FlatButton onClick={props.updateSlider}>
+          Click to save your slider location!
+        </FlatButton>
       </div>
     </div>
   );

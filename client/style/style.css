@@ -64,3 +64,17 @@ a {
   width: 300px;
   padding: 5px;
 }
+
+.favorite {
+  width: 200px;
+  padding: 5px;
+  background: lightgoldenrodyellow;
+}
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: inline;
+}

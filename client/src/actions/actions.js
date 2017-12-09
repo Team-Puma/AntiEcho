@@ -1,6 +1,5 @@
 import * as types from '../constants/actionTypes';
 import fetch from 'isomorphic-fetch';
-import { ADD_FAVORITE } from '../constants/actionTypes';
 // const request = require('request');
 
 export const searchArticles = (response) => ({
@@ -49,17 +48,7 @@ export function onSubmit() {
   };
 }
 
-export function onLoad() {
-  return function (dispatch, getState) {
-    dispatch(fetchPosts());
-    return fetch('http://localhost:3000/api/top')
-      .then(response => response.json())
-      .then(json => dispatch(searchArticles(json)))
-      .catch(err => {
-        console.log(err);
-      });
-  };
-}
+
 
 export const personalizeUser = (data) => ({
   type: types.PERSONALIZE_USER,
@@ -79,11 +68,44 @@ export const logout = () => ({
   type: types.LOGOUT,
 });
 
+export const updateFavorites = (favorite) => {
+  return (dispatch, getState) => {
+    const favorites = [...getState().user.favorites, favorite];
+    const email = getState().user.email;
+    return fetch('http://localhost:3000/user/updateFavorites', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email,
+        favorites,
+      }),
+    }).then(dispatch(addFavorite(favorite)))
+    .catch(err => console.log(err));
+  };
+};
+
+export const updateSlider = () => {
+  return (dispatch, getState) => {
+    const email = getState().user.email;
+    const slider = getState().main.sliderValue;
+    return fetch('http://localhost:3000/user/updateSlider', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email,
+        slider,
+      }),
+    }).then(dispatch(setSlider()))
+    .catch(err => console.log(err));
+  };
+};
+
 export const login = () => {
   return (dispatch, getState) => {
     return fetch('http://localhost:3000/user', {
       method: 'POST',
-      body: { email: getState().user.email },
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: getState().user.email }),
     })
       .then(response => response.json())
       .then(json => dispatch(personalizeUser(json)))
@@ -92,3 +114,18 @@ export const login = () => {
       });
   };
 };
+
+export function onLoad() {
+  return function (dispatch, getState) {
+    dispatch(fetchPosts());
+    return fetch('http://localhost:3000/api/top')
+      .then(response => response.json())
+      .then(json => {
+        dispatch(searchArticles(json));
+        dispatch(login());
+      })
+        .catch(err => {
+        console.log(err);
+      });
+  };
+}

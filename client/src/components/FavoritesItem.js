@@ -1,13 +1,28 @@
+// import React from 'react';
+
+// const FavoritesItem = props => {
+//   return (
+//     <div className="favoritesItem">
+//       <a href={props.url}>
+//         This is a tile
+//       </a>
+//     </div>
+//   )
+
+
+// }
+
+
 import React from 'react';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 
-const NewsFeedItem = props => {
+const FavoritesItem = props => {
   let buttonClass = 'hidden';
   if (props.email !== '') buttonClass = 'visible';
 
   return (
-    <div id="card">
+    <div className="favorite">
       <Card style={{
         width: '100%'
       }}>
@@ -31,34 +46,10 @@ const NewsFeedItem = props => {
           </CardText>
         </a>
       </Card>
-      <div className={buttonClass}>
-        <FlatButton onClick={() => props.handleClick({
-          id: props.id,
-          author: props.author,
-          source: props.source,
-          title: props.title,
-          description: props.description,
-          url: props.url,
-          urlToImage: props.urlToImage,
-          publishedAt: props.publishedAt,
-        })}>
-            Add to Favorites
-        </FlatButton>
-      </div>
     </div>
   );
 };
 
-// export default NewsFeedItem;
 
-module.exports = NewsFeedItem;
 
-// {/* <NewsFeedItem
-//   key={i}
-//   id={article._id}
-//   author={article.author}
-//   title={article.title}
-//   description={article.description}
-//   url={article.url}
-//   urlToImage={article.urlToImage}
-// /> */}
+module.exports = FavoritesItem;

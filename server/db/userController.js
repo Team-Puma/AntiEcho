@@ -55,6 +55,7 @@ userController.updateFavorites = (req, res, next) => {
 }
 
 userController.updateSlider = (req, res, next) => {
+    console.log(req);
     User.update( 
         //{email: "johndoe@gmail.com"}, 
         {email: req.body.email},     
