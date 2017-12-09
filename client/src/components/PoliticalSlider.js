@@ -5,7 +5,7 @@ import FlatButton from 'material-ui/FlatButton';
 
 const PoliticalSlider = (props) => {
   // console.log(props.sliderValue);
-  let buttonClass = 'visible';
+  let buttonClass = 'hidden';
   if (props.email !== '') buttonClass = 'visible';
 
   return (

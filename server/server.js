@@ -24,8 +24,8 @@ app.use(bodyParser.json());
 app.get('/api/articles', newsAPI.apiQuery, articleController.addToQueries, articleController.timeoutRemoveQuery);
 app.get('/api/top', newsAPI.apiHeadlines, articleController.addToHeadlines, articleController.timeoutRemoveHeadlines);
 app.post('/user', userController.findOneOrCreate);
-app.put('/user/updateFavorites', userController.updateFavorites);
-app.put('/user/updateSlider', userController.updateSlider);
+app.post('/user/updateFavorites', userController.updateFavorites);
+app.post('/user/updateSlider', userController.updateSlider);
 
 app.listen(port);
 console.log(`Server started on PORT:${port}`);

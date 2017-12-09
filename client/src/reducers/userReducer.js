@@ -2,7 +2,7 @@ import * as types from '../constants/actionTypes';
 import store from '../store';
 
 const initialState = {
-  email: '',
+  email: 'johndoe@gmail.com',
   name: '',
   favorites: [],
   slider: 0,
@@ -23,12 +23,13 @@ const userReducer = (state=initialState, action) => {
       };
     case types.SET_SLIDER:
       const newSlider = store.getState().main.sliderValue;
+      return Object.assign({}, state, {slider: newSlider})
       return {
         ...state,
         slider: newSlider,
       };
     case types.ADD_FAVORITE:
-      const newFavorites = [...state.user.favorites, action.payload];
+      const newFavorites = [...state.favorites, action.payload];
       return {
         ...state,
         favorites: newFavorites,
